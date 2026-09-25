@@ -153,18 +153,14 @@
     </div>
 
     <script>
-       function loginUser(event) {
+      function loginUser(event) {
     event.preventDefault();
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
     if (email && password) {
-
-        // Save login information
         localStorage.setItem("userEmail", email);
-
-        // Open student dashboard
         window.location.href = "dashboard.html";
     }
 }
