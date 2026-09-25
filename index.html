@@ -3,17 +3,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Internship & Job Portal</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: #ffffff;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .login-btn {
+            background: #2563eb;
+            color: white !important;
+            padding: 10px 18px;
+            border-radius: 6px;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            background: white;
+            max-width: 750px;
+            margin: auto;
+            padding: 12px;
+            border-radius: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .search-box button {
+            padding: 15px 25px;
+            background: #111827;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* SECTION */
+        .section {
+            padding: 60px 7%;
+        }
+
+        .section h2 {
+            text-align: center;
+            margin-bottom: 35px;
+            font-size: 30px;
+        }
+
+        /* CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #2563eb;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .apply-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+        }
+
+        /* FEATURES */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        .feature h3 {
+            margin: 15px 0 10px;
+        }
+
+        .feature p {
+            color: #666;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .cards,
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>Internship & Job Portal</h1>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">InternHub</div>
 
-    <p>Find internships and jobs for college students.</p>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#internships">Internships</a></li>
+            <li><a href="#jobs">Jobs</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#" class="login-btn">Login / Register</a></li>
+        </ul>
+    </nav>
 
-    <button>Find Internships</button>
-    <button>Find Jobs</button>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+
+        <h1>Find Your Dream Internship & Job</h1>
+
+        <p>
+            Discover internships and job opportunities specially designed
+            for college students.
+        </p>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                placeholder="Search jobs, internships, skills..."
+            >
+
+            <input
+                type="text"
+                placeholder="Location"
+            >
+
+            <button>Search</button>
+
+        </div>
+
+    </section>
+
+
+    <!-- INTERNSHIPS -->
+    <section class="section" id="internships">
+
+        <h2>Featured Internships</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Web Development Intern</h3>
+
+                <p>Company: Tech Solutions</p>
+
+                <p>Location: Remote</p>
+
+                <p>Skills: HTML, CSS, JavaScript</p>
+
+                <a href="#" class="apply-btn">View Internship</a>
+            </div>
+
+
+            <div class="card">
+                <h3>AI / ML Intern</h3>
+
+                <p>Company: Future AI</p>
+
+                <p>Location: Bangalore</p>
+
+                <p>Skills: Python, Machine Learning</p>
+
+                <a href="#" class="apply-btn">View Internship</a>
+            </div>
+
+
+            <div class="card">
+                <h3>Digital Marketing Intern</h3>
+
+                <p>Company: Growth Media</p>
+
+                <p>Location: Remote</p>
+
+                <p>Skills: SEO, Social Media</p>
+
+                <a href="#" class="apply-btn">View Internship</a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- JOBS -->
+    <section class="section" id="jobs">
+
+        <h2>Latest Jobs</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Junior Web Developer</h3>
+
+                <p>Company: Startup India</p>
+
+                <p>Location: Noida</p>
+
+                <p>Experience: Fresher</p>
+
+                <a href="#" class="apply-btn">View Job</a>
+            </div>
+
+
+            <div class="card">
+                <h3>Software Developer</h3>
+
+                <p>Company: Tech World</p>
+
+                <p>Location: Delhi</p>
+
+                <p>Experience: 0-1 Year</p>
+
+                <a href="#" class="apply-btn">View Job</a>
+            </div>
+
+
+            <div class="card">
+                <h3>Data Analyst</h3>
+
+                <p>Company: Data Corp</p>
+
+                <p>Location: Mumbai</p>
+
+                <p>Skills: Excel, SQL, Python</p>
+
+                <a href="#" class="apply-btn">View Job</a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+
+        <h2>Why Use InternHub?</h2>
+
+        <div class="features">
+
+            <div class="feature">
+                <div style="font-size:40px;">👨‍🎓</div>
+                <h3>Student Profile</h3>
+                <p>
+                    Create your profile and showcase your skills,
+                    education and resume.
+                </p>
+            </div>
+
+
+            <div class="feature">
+                <div style="font-size:40px;">📄</div>
+                <h3>Easy Applications</h3>
+                <p>
+                    Apply for internships and jobs from one place.
+                </p>
+            </div>
+
+
+            <div class="feature">
+                <div style="font-size:40px;">📊</div>
+                <h3>Track Applications</h3>
+                <p>
+                    Keep track of your applications and their status.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>© 2026 InternHub - Internship & Job Portal</p>
+
+        <p>Built for College Students</p>
+
+    </footer>
 
 </body>
 </html>
