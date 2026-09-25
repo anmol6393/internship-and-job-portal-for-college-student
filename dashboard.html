@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard - InternHub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            height: 70px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .welcome {
+            color: #555;
+        }
+
+        .logout {
+            padding: 9px 16px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .logout:hover {
+            background: #dc2626;
+        }
+
+        /* Main */
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #666;
+        }
+
+        /* Cards */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        /* Layout */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            font-size: 21px;
+        }
+
+        /* Profile */
+
+        .profile {
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 90px;
+            height: 90px;
+            background: #dbeafe;
+            color: #2563eb;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .profile h3 {
+            margin-bottom: 5px;
+        }
+
+        .profile p {
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .edit-btn {
+            margin-top: 15px;
+            padding: 10px 18px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        /* Resume */
+
+        .resume-box {
+            border: 2px dashed #cbd5e1;
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .resume-box p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .upload-btn {
+            display: inline-block;
+            padding: 10px 18px;
+            background: #2563eb;
+            color: white;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .upload-btn input {
+            display: none;
+        }
+
+        /* Internship */
+
+        .internship {
+            border: 1px solid #e5e7eb;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .internship:last-child {
+            margin-bottom: 0;
+        }
+
+        .internship h3 {
+            margin-bottom: 7px;
+        }
+
+        .company {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+
+        .apply-btn {
+            padding: 9px 16px;
+            border: none;
+            border-radius: 7px;
+            background: #16a34a;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .apply-btn:hover {
+            background: #15803d;
+        }
+
+        /* Applications */
+
+        .application {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .application:last-child {
+            border-bottom: none;
+        }
+
+        .application h4 {
+            margin-bottom: 5px;
+        }
+
+        .application p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .status {
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .selected {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 900px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .welcome {
+                display: none;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .heading h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            InternHub
+        </div>
+
+        <div class="nav-right">
+
+            <span class="welcome">
+                Welcome, Student 👋
+            </span>
+
+            <button class="logout" onclick="logoutUser()">
+                Logout
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Main Container -->
+
+    <main class="container">
+
+        <div class="heading">
+
+            <h1>Student Dashboard</h1>
+
+            <p>
+                Manage your profile, internships and applications.
+            </p>
+
+        </div>
+
+
+        <!-- Statistics -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <h3>Applications</h3>
+                <div class="number">5</div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Under Review</h3>
+                <div class="number">2</div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Selected</h3>
+                <div class="number">1</div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Profile</h3>
+                <div class="number">80%</div>
+            </div>
+
+        </section>
+
+
+        <!-- Dashboard Grid -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- LEFT SIDE -->
+
+            <div>
+
+                <!-- Profile -->
+
+                <div class="card profile">
+
+                    <h2>My Profile</h2>
+
+                    <div class="profile-image">
+                        A
+                    </div>
+
+                    <h3>Student Name</h3>
+
+                    <p>student@email.com</p>
+
+                    <p>B.Tech Computer Science</p>
+
+                    <p>College Name</p>
+
+                    <button
+                        class="edit-btn"
+                        onclick="editProfile()">
+                        Edit Profile
+                    </button>
+
+                </div>
+
+
+                <!-- Resume -->
+
+                <div class="card">
+
+                    <h2>My Resume</h2>
+
+                    <div class="resume-box">
+
+                        <p>
+                            Upload your resume to apply for internships.
+                        </p>
+
+                        <label class="upload-btn">
+
+                            Upload Resume
+
+                            <input
+                                type="file"
+                                accept=".pdf,.doc,.docx"
+                                onchange="resumeUploaded(event)"
+                            >
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div>
+
+
+                <!-- Recommended Internships -->
+
+                <div class="card">
+
+                    <h2>Recommended Internships</h2>
+
+
+                    <div class="internship">
+
+                        <h3>Web Development Intern</h3>
+
+                        <p class="company">
+                            Tech Solutions Pvt. Ltd.
+                        </p>
+
+                        <div class="tags">
+
+                            <span class="tag">
+                                HTML
+                            </span>
+
+                            <span class="tag">
+                                CSS
+                            </span>
+
+                            <span class="tag">
+                                JavaScript
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="apply-btn"
+                            onclick="applyInternship('Web Development Intern')">
+
+                            Apply Now
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="internship">
+
+                        <h3>Python Developer Intern</h3>
+
+                        <p class="company">
+                            Innovate Technologies
+                        </p>
+
+                        <div class="tags">
+
+                            <span class="tag">
+                                Python
+                            </span>
+
+                            <span class="tag">
+                                Django
+                            </span>
+
+                            <span class="tag">
+                                SQL
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="apply-btn"
+                            onclick="applyInternship('Python Developer Intern')">
+
+                            Apply Now
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="internship">
+
+                        <h3>AI / ML Intern</h3>
+
+                        <p class="company">
+                            Future AI Labs
+                        </p>
+
+                        <div class="tags">
+
+                            <span class="tag">
+                                Python
+                            </span>
+
+                            <span class="tag">
+                                Machine Learning
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="apply-btn"
+                            onclick="applyInternship('AI / ML Intern')">
+
+                            Apply Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Applications -->
+
+                <div class="card">
+
+                    <h2>My Applications</h2>
+
+
+                    <div class="application">
+
+                        <div>
+
+                            <h4>Frontend Developer Intern</h4>
+
+                            <p>ABC Technologies</p>
+
+                        </div>
+
+                        <span class="status pending">
+                            Under Review
+                        </span>
+
+                    </div>
+
+
+                    <div class="application">
+
+                        <div>
+
+                            <h4>Python Developer Intern</h4>
+
+                            <p>Tech Solutions</p>
+
+                        </div>
+
+                        <span class="status selected">
+                            Selected
+                        </span>
+
+                    </div>
+
+
+                    <div class="application">
+
+                        <div>
+
+                            <h4>Data Analyst Intern</h4>
+
+                            <p>DataCorp</p>
+
+                        </div>
+
+                        <span class="status rejected">
+                            Rejected
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        function logoutUser() {
+
+            alert("You have been logged out.");
+
+            window.location.href = "index.html";
+
+        }
+
+
+        function editProfile() {
+
+            alert(
+                "Profile editing feature will be connected soon."
+            );
+
+        }
+
+
+        function resumeUploaded(event) {
+
+            const file = event.target.files[0];
+
+            if (file) {
+
+                alert(
+                    "Resume selected: " + file.name
+                );
+
+            }
+
+        }
+
+
+        function applyInternship(internshipName) {
+
+            alert(
+                "Application submitted for: " +
+                internshipName
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>
