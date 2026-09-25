@@ -650,47 +650,160 @@
 
     <script>
 
-        function logoutUser() {
+       <script>
 
-            alert("You have been logged out.");
+    // Show logged-in student's email
+    function loadUser() {
 
-            window.location.href = "index.html";
+        const userEmail =
+            localStorage.getItem("userEmail");
 
-        }
+        if (userEmail) {
 
+            const emailElement =
+                document.getElementById("studentEmail");
 
-        function editProfile() {
-
-            alert(
-                "Profile editing feature will be connected soon."
-            );
-
-        }
-
-
-        function resumeUploaded(event) {
-
-            const file = event.target.files[0];
-
-            if (file) {
-
-                alert(
-                    "Resume selected: " + file.name
-                );
-
+            if (emailElement) {
+                emailElement.textContent = userEmail;
             }
+        }
+    }
 
+
+    // Load applications
+    function loadApplications() {
+
+        const userEmail =
+            localStorage.getItem("userEmail");
+
+        const applications =
+            JSON.parse(
+                localStorage.getItem("applications")
+            ) || [];
+
+        const myApplications =
+            applications.filter(function(application) {
+
+                return application.email === userEmail;
+
+            });
+
+        const applicationContainer =
+            document.getElementById(
+                "applicationList"
+            );
+
+        const applicationCount =
+            document.getElementById(
+                "applicationCount"
+            );
+
+        if (!applicationContainer) {
+            return;
+        }
+
+        applicationContainer.innerHTML = "";
+
+        applicationCount.textContent =
+            myApplications.length;
+
+
+        if (myApplications.length === 0) {
+
+            applicationContainer.innerHTML = `
+                <p style="color:#64748b;">
+                    You haven't applied for any internship yet.
+                </p>
+            `;
+
+            return;
         }
 
 
-        function applyInternship(internshipName) {
+        myApplications.forEach(function(application) {
+
+            const div =
+                document.createElement("div");
+
+            div.className = "application";
+
+            div.innerHTML = `
+
+                <div>
+
+                    <h4>
+                        ${application.internship}
+                    </h4>
+
+                    <p>
+                        Applied on ${application.date}
+                    </p>
+
+                </div>
+
+                <span class="status pending">
+                    ${application.status}
+                </span>
+
+            `;
+
+            applicationContainer.appendChild(div);
+
+        });
+
+    }
+
+
+    // Logout
+    function logoutUser() {
+
+        localStorage.removeItem("userEmail");
+
+        alert("You have been logged out.");
+
+        window.location.href = "index.html";
+
+    }
+
+
+    // Edit profile
+    function editProfile() {
+
+        alert(
+            "Profile editing feature will be added next."
+        );
+
+    }
+
+
+    // Resume upload
+    function resumeUploaded(event) {
+
+        const file =
+            event.target.files[0];
+
+        if (file) {
 
             alert(
-                "Application submitted for: " +
-                internshipName
+                "Resume selected: " +
+                file.name
             );
 
         }
+
+    }
+
+
+    // Load dashboard data
+    window.onload = function() {
+
+        loadUser();
+
+        loadApplications();
+
+    };
+
+</script>
 
     </script>
 
