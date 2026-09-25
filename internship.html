@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Internships - InternHub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1e293b;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            height: 70px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .dashboard-btn {
+            background: #2563eb;
+            color: white !important;
+            padding: 9px 16px;
+            border-radius: 7px;
+        }
+
+        /* Header */
+
+        .page-header {
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+
+        .page-header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #64748b;
+            font-size: 17px;
+        }
+
+        /* Search */
+
+        .search-area {
+            max-width: 1000px;
+            margin: 0 auto 35px;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 12px;
+        }
+
+        .search-box input,
+        .search-box select {
+            padding: 13px;
+            border: 1px solid #dbe1ea;
+            border-radius: 8px;
+            background: white;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .search-box input {
+            flex: 1;
+        }
+
+        .search-box select {
+            width: 190px;
+        }
+
+        .search-btn {
+            padding: 13px 22px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Internship Grid */
+
+        .internship-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px 50px;
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .internship-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+            transition: 0.2s;
+        }
+
+        .internship-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: #dbeafe;
+            color: #2563eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+        .internship-card h2 {
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .company {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .detail {
+            background: #f1f5f9;
+            padding: 7px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #475569;
+        }
+
+        .skills {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .skill {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+
+        .bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stipend {
+            font-weight: bold;
+            color: #16a34a;
+        }
+
+        .apply-btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .apply-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 40px;
+            color: #64748b;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 750px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links a:first-child {
+                display: none;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .search-box select {
+                width: 100%;
+            }
+
+            .internship-container {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            InternHub
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="dashboard.html" class="dashboard-btn">
+                Dashboard
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Header -->
+
+    <section class="page-header">
+
+        <h1>
+            Find Your Internship
+        </h1>
+
+        <p>
+            Explore opportunities and start building your career.
+        </p>
+
+    </section>
+
+
+    <!-- Search -->
+
+    <div class="search-area">
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search internships, skills or companies..."
+            >
+
+            <select id="locationFilter">
+
+                <option value="all">
+                    All Locations
+                </option>
+
+                <option value="Remote">
+                    Remote
+                </option>
+
+                <option value="Delhi">
+                    Delhi
+                </option>
+
+                <option value="Noida">
+                    Noida
+                </option>
+
+                <option value="Bangalore">
+                    Bangalore
+                </option>
+
+            </select>
+
+            <button
+                class="search-btn"
+                onclick="searchInternships()">
+
+                Search
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Internship Cards -->
+
+    <div class="internship-container" id="internshipContainer">
+
+
+        <!-- Internship 1 -->
+
+        <div
+            class="internship-card"
+            data-location="Remote"
+            data-search="web development frontend html css javascript">
+
+            <div class="company-logo">
+                TS
+            </div>
+
+            <h2>
+                Web Development Intern
+            </h2>
+
+            <p class="company">
+                Tech Solutions Pvt. Ltd.
+            </p>
+
+            <div class="details">
+
+                <span class="detail">
+                    📍 Remote
+                </span>
+
+                <span class="detail">
+                    ⏱ 3 Months
+                </span>
+
+                <span class="detail">
+                    🎓 Students
+                </span>
+
+            </div>
+
+            <div class="skills">
+
+                <span class="skill">
+                    HTML
+                </span>
+
+                <span class="skill">
+                    CSS
+                </span>
+
+                <span class="skill">
+                    JavaScript
+                </span>
+
+            </div>
+
+            <div class="bottom">
+
+                <span class="stipend">
+                    ₹10,000 / month
+                </span>
+
+                <button
+                    class="apply-btn"
+                    onclick="apply('Web Development Intern')">
+
+                    Apply Now
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Internship 2 -->
+
+        <div
+            class="internship-card"
+            data-location="Noida"
+            data-search="python developer django sql python">
+
+            <div class="company-logo">
+                IT
+            </div>
+
+            <h2>
+                Python Developer Intern
+            </h2>
+
+            <p class="company">
+                Innovate Technologies
+            </p>
+
+            <div class="details">
+
+                <span class="detail">
+                    📍 Noida
+                </span>
+
+                <span class="detail">
+                    ⏱ 6 Months
+                </span>
+
+                <span class="detail">
+                    🎓 Students
+                </span>
+
+            </div>
+
+            <div class="skills">
+
+                <span class="skill">
+                    Python
+                </span>
+
+                <span class="skill">
+                    Django
+                </span>
+
+                <span class="skill">
+                    SQL
+                </span>
+
+            </div>
+
+            <div class="bottom">
+
+                <span class="stipend">
+                    ₹12,000 / month
+                </span>
+
+                <button
+                    class="apply-btn"
+                    onclick="apply('Python Developer Intern')">
+
+                    Apply Now
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Internship 3 -->
+
+        <div
+            class="internship-card"
+            data-location="Bangalore"
+            data-search="ai machine learning python artificial intelligence">
+
+            <div class="company-logo">
+                AI
+            </div>
+
+            <h2>
+                AI / ML Intern
+            </h2>
+
+            <p class="company">
+                Future AI Labs
+            </p>
+
+            <div class="details">
+
+                <span class="detail">
+                    📍 Bangalore
+                </span>
+
+                <span class="detail">
+                    ⏱ 4 Months
+                </span>
+
+                <span class="detail">
+                    🎓 Students
+                </span>
+
+            </div>
+
+            <div class="skills">
+
+                <span class="skill">
+                    Python
+                </span>
+
+                <span class="skill">
+                    Machine Learning
+                </span>
+
+                <span class="skill">
+                    AI
+                </span>
+
+            </div>
+
+            <div class="bottom">
+
+                <span class="stipend">
+                    ₹15,000 / month
+                </span>
+
+                <button
+                    class="apply-btn"
+                    onclick="apply('AI / ML Intern')">
+
+                    Apply Now
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Internship 4 -->
+
+        <div
+            class="internship-card"
+            data-location="Delhi"
+            data-search="data analyst excel sql python data">
+
+            <div class="company-logo">
+                DC
+            </div>
+
+            <h2>
+                Data Analyst Intern
+            </h2>
+
+            <p class="company">
+                DataCorp Solutions
+            </p>
+
+            <div class="details">
+
+                <span class="detail">
+                    📍 Delhi
+                </span>
+
+                <span class="detail">
+                    ⏱ 3 Months
+                </span>
+
+                <span class="detail">
+                    🎓 Students
+                </span>
+
+            </div>
+
+            <div class="skills">
+
+                <span class="skill">
+                    Excel
+                </span>
+
+                <span class="skill">
+                    SQL
+                </span>
+
+                <span class="skill">
+                    Python
+                </span>
+
+            </div>
+
+            <div class="bottom">
+
+                <span class="stipend">
+                    ₹9,000 / month
+                </span>
+
+                <button
+                    class="apply-btn"
+                    onclick="apply('Data Analyst Intern')">
+
+                    Apply Now
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Internship 5 -->
+
+        <div
+            class="internship-card"
+            data-location="Remote"
+            data-search="graphic designer ui ux figma design">
+
+            <div class="company-logo">
+                GD
+            </div>
+
+            <h2>
+                UI/UX Design Intern
+            </h2>
+
+            <p class="company">
+                Creative Studio
+            </p>
+
+            <div class="details">
+
+                <span class="detail">
+                    📍 Remote
+                </span>
+
+                <span class="detail">
+                    ⏱ 3 Months
+                </span>
+
+                <span class="detail">
+                    🎓 Students
+                </span>
+
+            </div>
+
+            <div class="skills">
+
+                <span class="skill">
+                    Figma
+                </span>
+
+                <span class="skill">
+                    UI/UX
+                </span>
+
+                <span class="skill">
+                    Design
+                </span>
+
+            </div>
+
+            <div class="bottom">
+
+                <span class="stipend">
+                    ₹8,000 / month
+                </span>
+
+                <button
+                    class="apply-btn"
+                    onclick="apply('UI/UX Design Intern')">
+
+                    Apply Now
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="no-results" id="noResults">
+
+            <h2>
+                No internships found
+            </h2>
+
+            <p>
+                Try another search or location.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        function searchInternships() {
+
+            const search =
+                document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+            const location =
+                document
+                .getElementById("locationFilter")
+                .value;
+
+            const cards =
+                document.querySelectorAll(
+                    ".internship-card"
+                );
+
+            let found = 0;
+
+            cards.forEach(function(card) {
+
+                const text =
+                    card
+                    .getAttribute("data-search")
+                    .toLowerCase();
+
+                const cardLocation =
+                    card.getAttribute("data-location");
+
+                const searchMatch =
+                    text.includes(search);
+
+                const locationMatch =
+                    location === "all" ||
+                    cardLocation === location;
+
+                if (searchMatch && locationMatch) {
+
+                    card.style.display = "block";
+
+                    found++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+            document
+                .getElementById("noResults")
+                .style.display =
+                found === 0 ? "block" : "none";
+
+        }
+
+
+        function apply(internshipName) {
+
+            const userEmail =
+                localStorage.getItem("userEmail");
+
+            if (!userEmail) {
+
+                alert(
+                    "Please login before applying."
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+            alert(
+                "Application submitted successfully for " +
+                internshipName
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>
