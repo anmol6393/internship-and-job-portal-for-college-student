@@ -711,6 +711,50 @@
         });
 
     }
+           // Apply for internship from dashboard
+function applyInternship(internshipName) {
+    const userEmail = localStorage.getItem("userEmail");
+
+    if (!userEmail) {
+        alert("Please login before applying.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    let applications =
+        JSON.parse(localStorage.getItem("applications")) || [];
+
+    const alreadyApplied = applications.some(function(application) {
+        return (
+            application.internship === internshipName &&
+            application.email === userEmail
+        );
+    });
+
+    if (alreadyApplied) {
+        alert("You have already applied for " + internshipName);
+        return;
+    }
+
+    const newApplication = {
+        internship: internshipName,
+        email: userEmail,
+        status: "Applied",
+        date: new Date().toLocaleDateString()
+    };
+
+    applications.push(newApplication);
+
+    localStorage.setItem(
+        "applications",
+        JSON.stringify(applications)
+    );
+
+    alert("Application submitted successfully!");
+
+    // Refresh dashboard data
+    loadApplications();
+}
 
 
     // Logout
