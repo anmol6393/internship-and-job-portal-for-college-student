@@ -656,6 +656,26 @@
             document.getElementById(
                 "applicationCount"
             );
+        const underReviewCount =
+    document.getElementById("underReviewCount");
+
+const selectedCount =
+    document.getElementById("selectedCount");
+        const underReviewApplications =
+    myApplications.filter(function(application) {
+        return application.status === "Under Review";
+    });
+
+const selectedApplications =
+    myApplications.filter(function(application) {
+        return application.status === "Selected";
+    });
+
+underReviewCount.textContent =
+    underReviewApplications.length;
+
+selectedCount.textContent =
+    selectedApplications.length;
 
         if (!applicationContainer) {
             return;
